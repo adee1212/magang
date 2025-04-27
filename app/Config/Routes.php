@@ -48,7 +48,11 @@ $routes->group('mahasiswa', function ($routes) {
 // ROUTE DOSEN
 // ==========================================
 $routes->group('dosen', function ($routes) {
-    $routes->get('/dosen', 'DosenPembimbingController::index');
+    $routes->get('/', 'DosenPembimbingController::index'); // /dosen
+    $routes->get('editProfile', 'DosenPembimbingController::editProfile'); // /dosen/editProfile
+    $routes->post('updateProfile', 'DosenPembimbingController::updateProfile');
+    $routes->get('changePassword', 'DosenPembimbingController::changePassword');
+    $routes->post('update-password', 'DosenPembimbingController::updatePassword');
 
 
     // Bimbingan Logbook Mahasiswa

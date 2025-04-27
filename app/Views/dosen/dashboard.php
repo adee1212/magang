@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Dosen Pembimbing</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <style>
         body {
             background-color: #f8f9fa;
@@ -18,38 +19,19 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-custom">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand text-white" href="#">MAGANG | Politeknik Negeri Jakarta (PNJ)</a>
+            <a class="navbar-brand" href="#">MAGANG | Politeknik Negeri Jakarta (PNJ)</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="<?= site_url('dosen/dashboard'); ?>">Dashboard</a>
-                    </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                            Daftar Mahasiswa
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="<?= site_url('dosen/bimbingan'); ?>">Daftar Mahasiswa</a></li>
-                            <li><a class="dropdown-item" href="<?= site_url('mahasiswa/logbook'); ?>">Logbook Bimbingan</a></li>
-                            <li><a class="dropdown-item" href="<?= site_url('mahasiswa/logbook_industri'); ?>">Logbook Aktivitas</a></li>
-                            <li><a class="dropdown-item" href="<?= site_url('mahasiswa/nilai'); ?>">Nilai Mahasiswa</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="<?= site_url('dosen/bimbingan'); ?>">Kuesioner Industri</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="<?= site_url('admin/generate-akun'); ?>">Generate Akun</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                            <?= session('nama') ?> <span class="caret"></span>
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                            <?= session('nama') ?> <!-- Menampilkan Nama Dosen -->
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="<?= site_url('dosen/edit'); ?>">Profile</a>
-                            <a class="dropdown-item" href="<?= site_url('dosen/ganti-password'); ?>">Ganti Password</a>
+                            <a class="dropdown-item" href="<?= site_url('dosen/editProfile'); ?>">Edit Profil</a>
+                            <a class="dropdown-item" href="<?= site_url('dosen/changePassword'); ?>">Ganti Password</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="<?= site_url('logout'); ?>">Logout</a>
                         </div>
@@ -58,23 +40,36 @@
             </div>
         </div>
     </nav>
+</body>
 
-    <div class="container mt-4">
-        <h3>Selamat datang, <?= session('nama') ?></h3>
+<div class="container mt-4">
+    <h2>Dashboard Dosen Pembimbing</h2>
 
-        <div class="card mt-3 p-4">
-            <h5>Menu Dosen Pembimbing</h5>
-            <ul>
-                <li><a href="<?= site_url('mahasiswa/logbook'); ?>">Lihat Logbook Mahasiswa</a></li>
-                <li><a href="<?= site_url('mahasiswa/logbook_industri'); ?>">Lihat Logbook Aktivitas</a></li>
-                <li><a href="<?= site_url('mahasiswa/nilai'); ?>">Lihat Nilai Mahasiswa</a></li>
-            </ul>
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="alert alert-success">
+            <?= session()->getFlashdata('success') ?>
         </div>
+    <?php endif; ?>
+
+    <div class="card mt-3 p-4">
+        <h5>Informasi Dosen Pembimbing</h5>
+        <p class="card-text">
+            <strong>Nama:</strong> <?= esc($dosen['nama_lengkap']) ?> <br>
+            <strong>NIP:</strong> <?= esc($dosen['nip']) ?> <br>
+            <strong>No Telepon:</strong> <?= esc($dosen['no_telepon']) ?> <br>
+            <strong>Email:</strong> <?= esc($dosen['email']) ?> <br>
+            <strong>Link WhatsApp:</strong> <a href="<?= esc($dosen['link_whatsapp']) ?>" target="_blank"><?= esc($dosen['link_whatsapp']) ?></a>
+        </p>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <div class="mt-4">
+        <a href="<?= site_url('dosen/bimbingan'); ?>" class="btn btn-primary">Lihat Bimbingan Mahasiswa</a>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
 </body>
 
 </html>
