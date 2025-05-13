@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class PembimbingIndustri extends Model
 {
-    protected $table            = 'pembimbingindustris';
-    protected $primaryKey       = 'id';
+    protected $table            = 'pembimbing_industri';
+    protected $primaryKey       = 'pembimbing_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['user_id','pembimbing_id', 'perusahaan', 'email', 'no_telepon', 'nama', 'nip'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

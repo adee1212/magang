@@ -33,6 +33,9 @@
                         <a class="nav-link" href="<?= base_url('/admin/tambah-bimbingan'); ?>">Tambah Bimbingan</a> <!-- Tambahkan link untuk tambah bimbingan -->
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('/admin/bimbingan-industri'); ?>">Tambah Bimbingan Industri</a> <!-- Tambahkan link untuk tambah bimbingan -->
+                    </li>
+                    <li class="nav-item">
                         <a href="<?= base_url('/logout') ?>" class="btn btn-light ms-2">Logout</a>
                     </li>
                 </ul>

@@ -82,6 +82,7 @@ class MahasiswaController extends BaseController
             'nama_pembimbing_perusahaan' => $this->request->getPost('nama_pembimbing_perusahaan'),
             'no_hp_pembimbing_perusahaan' => $this->request->getPost('no_hp_pembimbing_perusahaan'),
             'email_pembimbing_perusahaan' => $this->request->getPost('email_pembimbing_perusahaan'),
+            'judul_magang' => $this->request->getPost('judul_magang'),
         ];
 
         // Update data mahasiswa

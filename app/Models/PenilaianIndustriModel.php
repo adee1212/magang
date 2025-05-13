@@ -4,18 +4,22 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Panitia extends Model
+class PenilaianIndustriModel extends Model
 {
-    protected $table            = 'panitia';
-    protected $primaryKey       = 'panitia_id';
+    protected $table            = 'penilaian_industri';
+    protected $primaryKey       = 'id_penilaian_industri';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['panitia_id','nip', 'email', 'no_telepon'];
 
+    protected $allowedFields    = [
+        'mahasiswa_id', 'komunikasi', 'berpikir_kritis', 'kerja_tim', 'inisiatif', 'literasi_digital',
+        'deskripsi_produk', 'speksifikasi_produk', 'desain_produk', 'implementasi_produk',
+        'pengujian_produk', 'total_nilai_industri'
+    ];
 
-    protected bool $allowEmptyInserts = false;
+    protected bool $allowEmptyInserts = true;
     protected bool $updateOnlyChanged = true;
 
     protected array $casts = [];
@@ -44,4 +48,18 @@ class Panitia extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    // ✅ Method untuk join data mahasiswa
+    public function getByMahasiswa($mahasiswa_id)
+    {
+        return $this->select('penilaian_industri.*, 
+                              mahasiswa.nama, 
+                              mahasiswa.nim, 
+                              mahasiswa.nama_pembimbing_perusahaan, 
+                              mahasiswa.judul_magang')
+                    ->join('mahasiswa', 'mahasiswa.mahasiswa_id = penilaian_industri.mahasiswa_id')
+                    ->where('penilaian_industri.mahasiswa_id', $mahasiswa_id)
+                    ->first();
+    }
+    
 }

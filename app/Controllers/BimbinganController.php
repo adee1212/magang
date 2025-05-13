@@ -34,15 +34,36 @@ class BimbinganController extends BaseController
     {
         $logbookModel = new LogbookBimbingan();
         $mahasiswaModel = new MahasiswaModel();
+        $bimbinganModel = new Bimbingan();
 
         $mahasiswa = $mahasiswaModel->find($mahasiswaId);
         $logbooks = $logbookModel->where('mahasiswa_id', $mahasiswaId)->findAll();
 
+        $disetujuiCount = $logbookModel->where('mahasiswa_id', $mahasiswaId)
+            ->where('status_validasi', 'disetujui')
+            ->countAllResults();
+        $totalCount = $logbookModel->where('mahasiswa_id', $mahasiswaId)->countAllResults();
+
+        // Ambil bimbingan_id berdasarkan mahasiswa dan dosen yang login
+        $dosenId = session()->get('user_id');
+        $bimbingan = $bimbinganModel->where([
+            'mahasiswa_id' => $mahasiswaId,
+            'dosen_id' => $dosenId
+        ])->first();
+
+        $bimbingan_id = $bimbingan['bimbingan_id'] ?? null;
+
+
         return view('dosen/bimbingan_logbook', [
             'mahasiswa' => $mahasiswa,
-            'logbooks' => $logbooks
+            'logbooks' => $logbooks,
+            'disetujuiCount' => $disetujuiCount,
+            'totalCount' => $totalCount,
+            'bimbingan_id' => $bimbingan_id // ✅ Kirim ke view
         ]);
     }
+
+
 
     // Menentukan relasi bimbingan mahasiswa-dosen
     public function tentukanBimbingan()
@@ -71,21 +92,27 @@ class BimbinganController extends BaseController
     public function setujui($logbookId)
     {
         $logbookModel = new LogbookBimbingan();
-        $logbookModel->update($logbookId, ['status' => 'disetujui']);
+
+        // Tambahkan pengecekan data
+        $logbook = $logbookModel->find($logbookId);
+        if (!$logbook) {
+            return redirect()->back()->with('error', 'Logbook tidak ditemukan.');
+        }
+
+        $logbookModel->update($logbookId, ['status_validasi' => 'disetujui']);
         return redirect()->back()->with('success', 'Logbook disetujui.');
     }
 
     public function tolak($logbookId)
     {
         $logbookModel = new LogbookBimbingan();
-        $logbookModel->update($logbookId, ['status' => 'ditolak']);
-        return redirect()->back()->with('success', 'Logbook ditolak.');
-    }
 
-    public function hapus($logbookId)
-    {
-        $logbookModel = new LogbookBimbingan();
-        $logbookModel->delete($logbookId);
-        return redirect()->back()->with('success', 'Logbook dihapus.');
+        $logbook = $logbookModel->find($logbookId);
+        if (!$logbook) {
+            return redirect()->back()->with('error', 'Logbook tidak ditemukan.');
+        }
+
+        $logbookModel->update($logbookId, ['status_validasi' => 'ditolak']);
+        return redirect()->back()->with('success', 'Logbook ditolak.');
     }
 }

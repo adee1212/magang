@@ -27,7 +27,8 @@ class MahasiswaModel extends Model
         'tanggal_selesai',
         'nama_pembimbing_perusahaan',
         'no_hp_pembimbing_perusahaan',
-        'email_pembimbing_perusahaan'
+        'email_pembimbing_perusahaan',
+        'judul_magang'
     ];
     // Metode untuk mengambil semua mahasiswa
     public function getAllMahasiswa()

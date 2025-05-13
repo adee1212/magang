@@ -25,18 +25,20 @@ class Filters extends BaseFilters
      * @var array<string, class-string|list<class-string>>
      */
     public array $aliases = [
-        'csrf'          => CSRF::class,
-        'toolbar'       => DebugToolbar::class,
-        'honeypot'      => Honeypot::class,
-        'invalidchars'  => InvalidChars::class,
-        'secureheaders' => SecureHeaders::class,
-        'cors'          => Cors::class,
-        'forcehttps'    => ForceHTTPS::class,
-        'pagecache'     => PageCache::class,
-        'performance'   => PerformanceMetrics::class,
-        // Menambahkan filter auth
-        'auth'          => Auth::class, // Baris ini menambahkan alias 'auth'
+        'csrf'          => \CodeIgniter\Filters\CSRF::class,
+        'toolbar'       => \CodeIgniter\Filters\DebugToolbar::class,
+        'honeypot'      => \CodeIgniter\Filters\Honeypot::class,
+        'invalidchars'  => \CodeIgniter\Filters\InvalidChars::class,
+        'secureheaders' => \CodeIgniter\Filters\SecureHeaders::class,
+        'cors'          => \CodeIgniter\Filters\Cors::class,
+        'forcehttps'    => \CodeIgniter\Filters\ForceHTTPS::class,
+        'pagecache'     => \CodeIgniter\Filters\PageCache::class,
+        'performance'   => \CodeIgniter\Filters\PerformanceMetrics::class,
+        // Menambahkan filter auth dengan namespace yang benar
+        'kpsauth'       => \App\Filters\KpsAuth::class, // <-- Fix here, with the proper namespace
+        'auth'          => \App\Filters\Auth::class, // already correct
     ];
+
 
     /**
      * List of special required filters.

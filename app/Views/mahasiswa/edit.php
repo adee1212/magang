@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profil Mahasiswa</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+
 <body>
     <div class="container mt-5">
         <h2>Edit Profil Mahasiswa</h2>
-        
+
         <?php if (session()->getFlashdata('error')): ?>
             <div class="alert alert-danger">
                 <?= session()->getFlashdata('error') ?>
@@ -69,15 +71,20 @@
                 <label for="email_pembimbing_perusahaan">Email Pembimbing Perusahaan:</label>
                 <input type="email" name="email_pembimbing_perusahaan" id="email_pembimbing_perusahaan" class="form-control" value="<?= esc($mahasiswa['email_pembimbing_perusahaan']) ?>">
             </div>
+            <div class="form-group">
+                <label for="judul_magang">Isi judul Laporan Magang:</label>
+                <input type="email" name="email_pembimbing_perusahaan" id="judul_magang" class="form-control" value="<?= esc($mahasiswa['email_pembimbing_perusahaan']) ?>">
+            </div>
             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
         </form>
-        
+
         <div class="mt-4">
             <a href="<?= site_url('mahasiswa/dashboard'); ?>" class="btn btn-secondary">Kembali ke Dashboard</a>
         </div>
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

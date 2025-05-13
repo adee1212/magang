@@ -4,15 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Kps extends Model
+class BimbinganIndustriModel extends Model
 {
-    protected $table            = 'kps';
-    protected $primaryKey       = 'kps_id';
+    protected $table            = 'bimbingan_industri';
+    protected $primaryKey       = 'bimbingan_industri_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields = ['kps_id', 'nip', 'email', 'no_telepon', 'nama']; // Sesuaikan dengan kolom tabel kps Anda
+    protected $allowedFields    = ['mahasiswa_id', 'pembimbing_id', 'created_at', 'updated_at'];
+
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -28,8 +29,7 @@ class Kps extends Model
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules = [];
-
+    protected $validationRules      = [];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;

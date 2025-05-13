@@ -12,7 +12,7 @@ class LogbookBimbingan extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['mahasiswa_id', 'tanggal', 'aktivitas', 'catatan_dosen', 'status_validasi']; // Kolom yang diizinkan
+    protected $allowedFields    = ['mahasiswa_id', 'tanggal', 'aktivitas', 'catatan_dosen', 'status_validasi', 'file_dokumen', 'link_drive']; // Kolom yang diizinkan
 
 
     protected bool $allowEmptyInserts = true;
